@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "./components/Card";
 import Wrapper from "./components/Wrapper";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import golfers from "./golfers.json";
 import "./App.css";
 
@@ -20,7 +20,7 @@ class App extends Component {
       });
     }
     this.state.golfers.forEach(card => {
-      golfer.count = 0;
+      card.count = 0;
     });
     alert(`Game Over :( \nscore: ${this.state.score}`);
     this.setState({score: 0});
@@ -28,14 +28,14 @@ class App extends Component {
   }
 
   clickCount = id => {
-    this.state.cards.find((o, i) => {
+    this.state.golfers.find((o, i) => {
       if (o.id === id) {
-        if(cards[i].count === 0){
-          cards[i].count = cards[i].count + 1;
+        if(golfers[i].count === 0){
+          golfers[i].count = golfers[i].count + 1;
           this.setState({score : this.state.score + 1}, function(){
             console.log(this.state.score);
           });
-          this.state.cards.sort(() => Math.random() - 0.5)
+          this.state.golfers.sort(() => Math.random() - 0.5)
           return true; 
         } else {
           this.gameOver();
@@ -43,12 +43,12 @@ class App extends Component {
       }
     });
   }
-  // Map over this.state.cards and render a cardCard component for each card object
+  // Map over this.state.golfers and render a Card component for each golfer object
   render() {
     return (
       <Wrapper>
-        <Header score={this.state.score} highscore={this.state.highscore}>Clicky Game</Header>
-        {this.state.cards.map(card => (
+        <Navbar score={this.state.score} highscore={this.state.highscore}>Clicky Game</Header>
+        {this.state.golfers.map(card => (
           <Card
             clickCount={this.clickCount}
             id={card.id}
