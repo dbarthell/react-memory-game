@@ -13,18 +13,17 @@ class App extends Component {
   };
 
   gameOver = () => {
- 
     this.state.golfers.forEach(card => {
       card.count = 0;
     });
-    alert(`Game Over :( \nscore: ${this.state.score}`);
+    alert(`Game Over! \nScore: ${this.state.score}`);
     this.setState({score: 0});
     return true;
   }
 
   clickCount = id => {
-    this.state.golfers.find((o, i) => {
-      if (o.id === id) {
+    this.state.golfers.find((item, i) => {
+      if (item.id === id) {
         if(golfers[i].count === 0){
           golfers[i].count = golfers[i].count + 1;
           this.setState({score : this.state.score + 1}, function(){
