@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "./components/Card";
-import Wrapper from "./components/Wrapper";
+import Container from "./components/Container";
 import Navbar from "./components/Navbar";
 import golfers from "./golfers.json";
 import "./App.css";
@@ -10,15 +10,10 @@ class App extends Component {
   state = {
     golfers,
     score: 0,
-    highscore: 0
   };
 
   gameOver = () => {
-    if (this.state.score > this.state.highscore) {
-      this.setState({highscore: this.state.score}, function() {
-        console.log(this.state.highscore);
-      });
-    }
+ 
     this.state.golfers.forEach(card => {
       card.count = 0;
     });
@@ -46,8 +41,8 @@ class App extends Component {
   // Map over this.state.golfers and render a Card component for each golfer object
   render() {
     return (
-      <Wrapper>
-        <Navbar score={this.state.score} highscore={this.state.highscore}>Clicky Game</Header>
+      <Container>
+        <Navbar score={this.state.score}>Clicky Golf!</Navbar>
         {this.state.golfers.map(card => (
           <Card
             clickCount={this.clickCount}
@@ -56,7 +51,7 @@ class App extends Component {
             image={card.image}
           />
         ))}
-      </Wrapper>
+      </Container>
     );
   }
 }
